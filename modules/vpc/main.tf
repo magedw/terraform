@@ -4,7 +4,7 @@ provider "aws" {
   region = var.region
 }
 
-#Get all available AZ's in VPC for this region
+#Get all available AZ's in VPC for master region
 #================================================
 data "aws_availability_zones" "azs" {
   state = "available"
@@ -20,6 +20,7 @@ resource "aws_vpc" "tf_vpc" {
     Name = "Terraform-VPC"
   }
 }
+
 
 #Create IGW in us-east-1
 #========================
@@ -43,8 +44,8 @@ resource "aws_route_table" "tf_public_route" {
   }
 }
 
-#Create subnet#1 in us-east-1 
-#================================
+#Create subnet # 1 in us-east-1 
+#===============================
 resource "aws_subnet" "tf_public_subnet" {
   availability_zone = element(data.aws_availability_zones.azs.names, 0)
   vpc_id     = aws_vpc.tf_vpc.id
@@ -53,6 +54,7 @@ resource "aws_subnet" "tf_public_subnet" {
     Name = "Terraform-Subnet"
   }
 }
+
 
 resource "aws_route_table_association" "tf_public_assoc" {
   subnet_id          = aws_subnet.tf_public_subnet.id
@@ -65,7 +67,7 @@ resource "aws_security_group" "tf_public_sg" {
   name        = "tf_public_sg"
   description = "Used for access to the public instances"
   vpc_id      = aws_vpc.tf_vpc.id
-  
+  #Inbound internet access
   #SSH
   ingress {
     description = "Allow SSH traffic"
@@ -83,7 +85,8 @@ resource "aws_security_group" "tf_public_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
+
+  #Outbound internet access
   egress {
     from_port   = 0
     to_port     = 0

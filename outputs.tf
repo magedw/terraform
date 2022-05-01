@@ -1,5 +1,5 @@
 #-----outputs.tf-----
 #====================
-output "Webserver-Public-URL" {
-  value = "http://${module.compute.server_ip}"
+output "Sever-Public-IP" {
+  value = "${module.compute.server_ip}"
 }
