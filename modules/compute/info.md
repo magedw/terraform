@@ -5,3 +5,5 @@
 - terraform plan
 - terraform apply --auto-approve
 - terraform destroy
+
+can you add docker hub account username and password?
