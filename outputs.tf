@@ -1,9 +1,9 @@
 #-----outputs.tf-----
 #====================
-output "Sever-Public-IP" {
-  value = module.compute.server_ip
+output "k8s-master-Public-IP" {
+  value = module.compute.k8s-master_server_ip
 }
 
-output "Jenkins-Public-URL" {
-  value = "http://${module.compute.server_ip}:8080"
+output "k8s-node-Public-IP" {
+  value = module.compute.k8s-node_server_ip
 }
