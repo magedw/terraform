@@ -15,8 +15,10 @@ variable "ssh_key_private" {
   default = "/Users/magedwahba/.ssh/id_rsa"
 }
 
-variable "subnet_ips" {}
+variable "public_subnet_one" {}
+variable "public_subnet_two" {}
 
 variable "security_group" {}
 
-variable "subnets" {}
+variable "subnet_ip_one" {}
+variable "subnet_ip_two" {}
